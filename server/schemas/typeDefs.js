@@ -10,7 +10,7 @@ const typeDefs = `
     removeBook(bookId: ID!): User
   }
   
-  input saveBook {
+  input SaveBookInput {
     bookAuthors: [String]!
     description: String!
     title: String!
