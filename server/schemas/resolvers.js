@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { signToken } = require('../utils/auth')
 
 const resolvers = {
   Query: {
@@ -26,13 +27,17 @@ const resolvers = {
       return { token, user };
     },
     addUser: async (parent, args) => {
-      const user = await createUser(args);
+      const user = await User.create(args);
       const token = signToken(user);
       return { token, user };
     },
     saveBook: async (parent, { input }, context) => {
       if (context.user) {
-        const updatedUser = await saveBook(context.user._id, input);
+        const updatedUser = await User.findByIdAndUpdate(
+          {_id: context.user._id},
+          {$push: {savedBooks: {input}}},
+          {new: true}
+        );
         return updatedUser;
       } else {
         throw new Error('Authentication required to save a book');

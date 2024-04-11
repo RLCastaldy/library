@@ -11,7 +11,7 @@ const typeDefs = `
   }
   
   input SaveBookInput {
-    bookAuthors: [String]!
+    authors: [String]!
     description: String!
     title: String!
     bookId: ID!
