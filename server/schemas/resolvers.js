@@ -4,8 +4,13 @@ const { signToken } = require('../utils/auth')
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
+      console.log(context.user);
       if (context.user) {
-        return await User.findById(context.user._id);
+        let userData = await User.findById({
+          _id: context.user._id
+        });
+        console.log(userData.savedBooks);
+        return userData
       } else {
         throw new Error('Authentication required to view user data');
       }
@@ -32,10 +37,11 @@ const resolvers = {
       return { token, user };
     },
     saveBook: async (parent, { input }, context) => {
+      // console.log(input);
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           {_id: context.user._id},
-          {$push: {savedBooks: {input}}},
+          {$push: {savedBooks: input}},
           {new: true}
         );
         return updatedUser;
@@ -44,8 +50,17 @@ const resolvers = {
       }
     },
     removeBook: async (parent, { bookId }, context) => {
+      console.log(bookId);
       if (context.user) {
-        const updatedUser = await deleteBook(context.user._id, bookId);
+        const updatedUser = await deleteBook({
+          _id: context.user._id,
+        },
+      {
+        $pull: {savedBooks: {bookId}}
+      },
+    {
+      new: true
+    });
         return updatedUser;
       } else {
         throw new Error('Authentication required to remove a book');

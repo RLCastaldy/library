@@ -71,6 +71,7 @@ const SearchBooks = () => {
     if (!token) {
       return false;
     }
+    console.log(bookToSave);
   
     try {
        await saveBook({
