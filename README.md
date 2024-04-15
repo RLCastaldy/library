@@ -5,7 +5,9 @@
 
 ## Description
 
-Virtual Library was built with the reading enthusiest in mind. Virtual Library makes use of the google api library to bring you a list of books that you can save for future reading.
+Virtual Library was built with the reading enthusiest in mind. Virtual Library makes use of the google api library to bring you a list of books that you can save for future reading.<br>
+<br>
+![Screenshot 2024-04-15 171751](https://github.com/RLCastaldy/library/assets/140565239/b3c32ad5-1230-4952-882f-808fbd2d67fd)<br>
 
 ## Table of Contents
 
