@@ -1,8 +1,6 @@
+require('dotenv').config(); // Load environment variables from .env file
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/googlebooks', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect(process.env.MONGODB_URI, {}); // Use the MONGODB_URI environment variable
 
 module.exports = mongoose.connection;
